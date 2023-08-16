@@ -1,0 +1,60 @@
+class Stack:
+    def __init__(self):
+        self.elements = []
+
+    def is_empty(self):
+        return len(self.elements) == 0
+
+    # option 1
+    def pop_element(self):
+        if not self.is_empty():
+            return self.elements.pop()
+        raise IndexError("pop from empty stack")
+
+    # option 2
+    # def pop_element(self):
+    #     if not self.is_empty():
+    #         top_index = len(self.elements) - 1
+    #         item = self.elements[top_index]
+    #         self.elements = self.elements[:top_index]
+    #         return item
+    # raise IndexError("pop from empty stack")
+
+    def push_element(self, element):
+        self.elements.append(element)
+
+    def top_element(self):
+        return self.elements[-1]
+
+    def size(self):
+        return len(self.elements)
+
+
+stack = Stack()
+
+
+class Queue:
+    def __init__(self):
+        self.items = []
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def size(self):
+        return len(self.items)
+
+    def pop_item(self):
+        if not self.is_empty():
+            return self.items.pop[0]
+        return IndexError("pop from empty queue")
+
+    def push_item(self, item):
+        self.items.append(item)
+
+    def front(self):
+        if not self.is_empty():
+            return self.items[0]
+        raise IndexError("front from empty queue")
+   
+    
+queue = Queue()
