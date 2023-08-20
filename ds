@@ -65,6 +65,12 @@ class Node:
         self.next = None
 
 
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
 class SinglyLinkedList:
     def __init__(self):
         self.head = None
@@ -157,8 +163,79 @@ class SinglyLinkedList:
     def clear(self):  # O(1)
         self.head = None
 
+    def reverse(self):
+        prev = None
+        current = self.head
+        while current:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        self.head = prev
+        return self.head
+
+    def merge(self, list1, list2):
+        current = list1.head
+        while current.next:
+            current = current.next
+        current.next = list2.head
+        return list1.head
+
+    def merge_sort(self):
+        if self.head is None or self.head.next is None:
+            return self.head
+        mid = self._find_middle()
+        left_half = SinglyLinkedList()
+        left_half.head = self.head
+        right_half = SinglyLinkedList()
+        right_half.head = mid.next
+        mid.next = None
+        left_half.merge_sort()
+        right_half.merge_sort()
+        self.head = self._merge(left_half.head, right_half.head)
+
+    def _find_middle(self):
+        slow = self.head
+        fast = self.head
+        while fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+    def _merge(self, left, right):
+        dummy = Node(0)
+        current = dummy
+        while left and right:
+            if left.value < right.value:
+                current.next = left
+                left = left.next
+            else:
+                current.next = right
+                right = right.next
+            current = current.next
+        if left:
+            current.next = left
+        else:
+            current.next = right
+        return dummy.next
+
 
 sl = SinglyLinkedList()
+
+print(sl.size())
+print(sl.is_empty())
+sl.insert(0,3)
+sl.insert(1,7)
+sl.push_front(5)
+sl.push_back(89)
+sl.push_back(4)
+sl.push_back(9)
+sl.display()
+sl.merge_sort()
+sl.display()
+sl.reverse()
+sl.display()
+sl.reverse()
+sl.display()
 
 class DynamicArray:
     def __init__(self):
